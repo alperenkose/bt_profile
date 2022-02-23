@@ -21,7 +21,7 @@ func main() {
 	sink = *s
 	showQuit = *q
 	if *c != "" {
-		codec = "_" + *c
+		codec = "-" + *c
 	}
 	systray.Run(onready, nil)
 }
@@ -42,11 +42,11 @@ func onready() {
 		case <-quit.ClickedCh:
 			systray.Quit()
 		case <-a2dp.ClickedCh:
-			exec.Command("pactl", "set-card-profile", sink, "a2dp_sink"+codec).Run()
+			exec.Command("pactl", "set-card-profile", sink, "a2dp-sink"+codec).Run()
 			a2dp.SetTitle(hifi + " 🎧")
 			hsphfp.SetTitle(headset)
 		case <-hsphfp.ClickedCh:
-			exec.Command("pactl", "set-card-profile", sink, "headset_head_unit").Run()
+			exec.Command("pactl", "set-card-profile", sink, "headset-head-unit").Run()
 			hsphfp.SetTitle(headset + " 🎧")
 			a2dp.SetTitle(hifi)
 		}
